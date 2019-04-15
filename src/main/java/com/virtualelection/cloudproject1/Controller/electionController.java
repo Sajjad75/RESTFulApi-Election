@@ -33,7 +33,7 @@ public class electionController {
 
     @GetMapping("/Election")
 
-    public List<Election> getAllUsers() {
+    public List<Election> getAllElections() {
 
         return electionRepository.findAll();
 
@@ -41,7 +41,7 @@ public class electionController {
 
     @GetMapping("/Election/{id}")
 
-    public ResponseEntity<Election> getUsersById(@PathVariable(value = "id") Long electionId)
+    public ResponseEntity<Election> getElectionsById(@PathVariable(value = "id") Long electionId)
 
             throws ResourceNotFoundException {
 
@@ -79,7 +79,7 @@ public class electionController {
 
                         .findById(electionId)
 
-                        .orElseThrow(() -> new ResourceNotFoundException("User not found on :: " + electionId));
+                        .orElseThrow(() -> new ResourceNotFoundException("Election not found on :: " + electionId));
 
         election.setTitle(electionDetails.getTitle());
         election.setEndTime(electionDetails.getEndTime());
@@ -103,7 +103,7 @@ public class electionController {
 
                         .findById(electionId)
 
-                        .orElseThrow(() -> new ResourceNotFoundException("User not found on :: " + electionId));
+                        .orElseThrow(() -> new ResourceNotFoundException("Election not found on :: " + electionId));
 
         electionRepository.delete(election);
 
