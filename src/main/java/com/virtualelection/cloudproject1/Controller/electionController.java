@@ -34,14 +34,14 @@ public class electionController {
     @GetMapping("/Election")
 
     public List<Election> getAllElections() {
-
+        System.out.println("Requset Sucessful!");
         return electionRepository.findAll();
 
     }
 
     @GetMapping("/Election/{id}")
 
-    public ResponseEntity<Election> getElectionsById(@PathVariable(value = "id") Long electionId)
+    public ResponseEntity<Election> getElectionsById(@PathVariable(value = "id") Integer electionId)
 
             throws ResourceNotFoundException {
 
@@ -52,7 +52,7 @@ public class electionController {
                         .findById(electionId)
 
                         .orElseThrow(() -> new ResourceNotFoundException("Election not found on :: " + electionId));
-
+        System.out.println("Requset Sucessful!");
         return ResponseEntity.ok().body(election);
 
     }
@@ -60,7 +60,7 @@ public class electionController {
     @PostMapping("/Election")
 
     public Election createElection(@Valid @RequestBody Election election) {
-
+        System.out.println("Requset Sucessful!");
         return electionRepository.save(election);
 
 
@@ -69,7 +69,7 @@ public class electionController {
 
     public ResponseEntity<Election> updateElection(
 
-            @PathVariable(value = "id") Long electionId, @Valid @RequestBody Election electionDetails)
+            @PathVariable(value = "id") Integer electionId, @Valid @RequestBody Election electionDetails)
 
             throws ResourceNotFoundException {
 
@@ -87,7 +87,7 @@ public class electionController {
         election.setListOfChoice(electionDetails.getListOfChoice());
         election.setNumberOfVotes(electionDetails.getNumberOfVotes());
         final Election updatedElection = electionRepository.save(election);
-
+        System.out.println("Requset Sucessful!");
         return ResponseEntity.ok(updatedElection);
 
     }
@@ -95,7 +95,7 @@ public class electionController {
 
     @DeleteMapping("/Election/{id}")
 
-    public Map<String, Boolean> deleteElection(@PathVariable(value = "id") Long electionId) throws Exception {
+    public Map<String, Boolean> deleteElection(@PathVariable(value = "id") Integer electionId) throws Exception {
 
         Election election =
 
@@ -106,11 +106,9 @@ public class electionController {
                         .orElseThrow(() -> new ResourceNotFoundException("Election not found on :: " + electionId));
 
         electionRepository.delete(election);
-
         Map<String, Boolean> response = new HashMap<>();
-
         response.put("deleted", Boolean.TRUE);
-
+        System.out.println("Requset Sucessful!");
         return response;
 
     }

@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 
 
-public interface electionRepository extends JpaRepository<Election, Long> {
+public interface electionRepository extends JpaRepository<Election, Integer> {
 }
